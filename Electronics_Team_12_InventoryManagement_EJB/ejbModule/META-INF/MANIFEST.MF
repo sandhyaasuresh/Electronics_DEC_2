@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Class-Path: Electronics_Team_12_InventoryManagement_EJBClient.jar
+
