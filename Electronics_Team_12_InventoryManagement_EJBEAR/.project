@@ -5,16 +5,10 @@
 	<projects>
 		<project>Electronics_Team_12_InventoryManagement_EJB</project>
 		<project>Electronics_Team_12_InventoryManagement_EJBClient</project>
-		<project>Electronics_Team_12</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
 			<name>org.eclipse.wst.common.project.facet.core.builder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
-		<buildCommand>
-			<name>org.eclipse.wst.validation.validationbuilder</name>
 			<arguments>
 			</arguments>
 		</buildCommand>
