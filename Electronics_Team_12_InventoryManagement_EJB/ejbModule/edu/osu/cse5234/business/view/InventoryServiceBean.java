@@ -4,14 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
-
-import edu.osu.cse5234.model.Item;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  * Session Bean implementation class InventoryServiceBean
  */
 @Stateless
 public class InventoryServiceBean implements InventoryService {
+	@PersistenceContext
+	EntityManager entityManager;
+	private String MY_QUERY = "Select i from Item i";
+			
 
     /**
      * Default constructor. 
@@ -23,19 +27,7 @@ public class InventoryServiceBean implements InventoryService {
 	@Override
 	public Inventory getAvailableInventory() {
 		Inventory inventory = new Inventory();
-		Item item1 = new Item("OnePlus 7T", "699.99", "0");
-		Item item2 = new Item("Dell xps 13in", "1349.99", "0");
-		Item item3 = new Item("Samsung s20", "999.99", "0");
-		Item item4 = new Item("Pixel 5", "729.99", "0");
-		Item item5 = new Item("Lenovo Thinkpad", "1499.99", "0");
-		
-		List<Item> items = new ArrayList<Item>();
-		items.add(item1);
-		items.add(item2);
-		items.add(item3);
-		items.add(item4);
-		items.add(item5);
-		
+		List<Item> items = entityManager.createQuery(MY_QUERY, Item.class).getResultList();
 		inventory.setItems(items);
 		return inventory;
 	}
