@@ -18,10 +18,9 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-web-4.2.0.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-webmvc-4.2.0.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-websocket-4.2.0.RELEASE.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Electronics_Team_12_InventoryManagement_EJB"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Electronics_Team_12_InventoryManagement_EJBClient"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre1.8.0_231">
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
+			<attribute name="module" value="true"/>
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
