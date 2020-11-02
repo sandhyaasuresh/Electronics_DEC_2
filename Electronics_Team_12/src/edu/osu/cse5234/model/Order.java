@@ -8,6 +8,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -15,7 +16,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import edu.osu.cse5234.business.view.Item;
-import edu.osu.cse5234.business.view.LineItem;
 
 @Entity
 @Table(name = "CUSTOMER_ORDER")
@@ -25,14 +25,14 @@ public class Order implements Serializable {
 	
 	@OneToMany(cascade = CascadeType.ALL) @JoinColumn(name="CUSTOMER_ORDER_ID_FK")
 	private List<LineItem> items;
-	
-	@Id @GeneratedValue @Column(name = "ID")
+
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "ID")
 	private int id;
 	
 	@Column(name = "CUSTOMER_NAME")
 	private String customerName;
 	
-	@Column(name = "CUSTOMER_EMAILs")
+	@Column(name = "CUSTOMER_EMAIL")
 	private String emailAddress;
 	
 	@OneToOne(cascade = CascadeType.ALL) @JoinColumn(name="SHIPPING_INFO_ID_FK")
@@ -48,8 +48,20 @@ public class Order implements Serializable {
 		emailAddress = null;
 	}
 	
+//	public List<LineItem> getItems() {
+//		return this.items;
+//	}
+//	
+//	public void setItems(List<LineItem> item) {
+//		this.items = item;
+//	}
+	
 	public List<LineItem> getItems() {
-		return this.items;
+		return items;
+	}
+
+	public void setItems(List<LineItem> items) {
+		this.items = items;
 	}
 	
 	public List<LineItem> addItem(LineItem item) {

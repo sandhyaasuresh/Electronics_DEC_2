@@ -33,7 +33,7 @@ public class InventoryServiceBean implements InventoryService {
 	}
 
 	@Override
-	public boolean validateQuantity(List<LineItem> items) {
+	public boolean validateQuantity(List<Item> items) {
 		// TODO Auto-generated method stub
 		return true;
 	}

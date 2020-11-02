@@ -22,11 +22,12 @@
 			</tr>
 			</thead>
 			<tbody>
-			<c:forEach items="${order.getItems()}"  var="item" varStatus="loop">
+			<c:forEach items="${inventory.getItems()}"  var="item" varStatus="loop">
 				<tr>
-					<td><form:input path="items[${loop.index}].name" readonly="true" /></td>
-					<td><form:input path="items[${loop.index}].price" readonly="true" /></td>
+					<td><form:input path="items[${loop.index}].name" readonly="true" value="${item.name}" /></td>
+					<td><form:input path="items[${loop.index}].price" readonly="true" value="${item.price}" /></td>
 					<td><form:input path="items[${loop.index}].quantity" /></td>
+					<td><form:hidden path="items[${loop.index}].itemNumber" readonly="true" value="${item.itemNumber}" /></td>
 				<tr>
 			</c:forEach>
 			<tr>

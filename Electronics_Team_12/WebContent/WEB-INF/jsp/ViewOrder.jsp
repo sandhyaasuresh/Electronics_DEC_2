@@ -32,46 +32,46 @@
 <table class="table">
 	<tr>
 		<td>Credit Card Number:</td>
-		<td>${payment.creditCardNumber}</td>
+		<td>${order.paymentInfo.creditCardNumber}</td>
 	</tr>
 	<tr>
 		<td>Expiration Date:</td>
-		<td>${payment.exprDate}</td>
+		<td>${order.paymentInfo.exprDate}</td>
 	</tr>
 	<tr>
 		<td>CVV Code:</td>
-		<td>${payment.cvvCode}</td>
+		<td>${order.paymentInfo.cvvCode}</td>
 	</tr>
 	<tr>
 		<td>Card Holder Name:</td>
-		<td>${payment.cardholderName}</td>
+		<td>${order.paymentInfo.cardholderName}</td>
 	 </tr>
 </table>
 <h2>Shipping Information</h2>
 <table class="table">
 	 <tr>
 		<td>Name:</td>
-		<td>${shipping.name}</td>
+		<td>${order.shippingInfo.name}</td>
 	</tr>
 	<tr>
 		<td>Address Line 1:</td>
-		<td>${shipping.addressLine1}</td>
+		<td>${order.shippingInfo.addressLine1}</td>
 	</tr>
 	<tr>
 		<td>Address Line 2:</td>
-		<td>${shipping.addressLine2}</td>
+		<td>${order.shippingInfo.addressLine2}</td>
 	</tr>
 	<tr>
 		<td>City:</td>
-		<td>${shipping.city}</td>
+		<td>${order.shippingInfo.city}</td>
 	</tr>
 	<tr>
 		<td>State:</td>
-		<td>${shipping.state}</td>
+		<td>${order.shippingInfo.state}</td>
 	</tr>
 	<tr>
 		<td>Zip:</td>
-		<td>${shipping.zip}</td>
+		<td>${order.shippingInfo.zip}</td>
 	 </tr>
 	 <tr>
 	 	<td colspan="2"><input type="submit" value="Confirm"></td>

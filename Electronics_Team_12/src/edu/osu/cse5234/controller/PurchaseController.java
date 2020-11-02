@@ -1,8 +1,10 @@
 package edu.osu.cse5234.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.enterprise.inject.New;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,10 +13,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+//import com.sun.org.apache.bcel.internal.generic.NEW;
+
 import edu.osu.cse5234.business.OrderProcessingServiceBean;
 import edu.osu.cse5234.business.view.Inventory;
 import edu.osu.cse5234.business.view.InventoryService;
 import edu.osu.cse5234.business.view.Item;
+import edu.osu.cse5234.model.LineItem;
 import edu.osu.cse5234.model.Order;
 import edu.osu.cse5234.model.PaymentInfo;
 import edu.osu.cse5234.model.ShippingInfo;
@@ -37,11 +42,14 @@ public class PurchaseController {
 		Order order = new Order();
 		
 		Inventory inventory = inventoryService.getAvailableInventory();
+		request.setAttribute("inventory", inventory);
 		
 		List<Item> items = inventory.getItems();
+		List<LineItem> lineItems = new ArrayList<>();
 		
 		for (Item item : items) {
-			item.setQuantity(0);
+//			item.setQuantity(0);
+			order.addItem(new LineItem());
 			//order.addItem(item);
 		}
 		
@@ -65,10 +73,11 @@ public class PurchaseController {
 	
 	@RequestMapping(path = "/paymentEntry", method = RequestMethod.GET)
 	public String displayPaymentEntryForm(HttpServletRequest request, HttpServletResponse response) {
-		Order order = (Order) request.getSession().getAttribute("order");
-		order.setPaymentInfo(new PaymentInfo());
+//		Order order = (Order) request.getSession().getAttribute("order");
+//		order.setPaymentInfo(new PaymentInfo());
 		
-		request.getSession().setAttribute("order", order);
+//		request.getSession().setAttribute("order", order);
+		request.setAttribute("payment", new PaymentInfo());
 		
 		return "PaymentEntryForm";
 	}
@@ -77,29 +86,31 @@ public class PurchaseController {
 	public String submitPayment(@ModelAttribute("payment") PaymentInfo payment, HttpServletRequest request) {
 		Order order = (Order) request.getSession().getAttribute("order");
 		order.setPaymentInfo(payment);
-		
-		request.getSession().setAttribute("order", order);
+		order.setCustomerName(payment.getCardholderName());
+		order.setEmailAddress("abc@gmail.com");
+//		request.getSession().setAttribute("order", order);
 		
 		return "redirect:/purchase/shippingEntry";
 	}
 	
 	@RequestMapping(path = "/shippingEntry", method = RequestMethod.GET)
 	public String displayShippingForm(HttpServletRequest request, HttpServletResponse response) {
-		Order order = (Order) request.getSession().getAttribute("order");
-		order.setShippingInfo(new ShippingInfo());
-		
-		request.getSession().setAttribute("order", order);
+//		Order order = (Order) request.getSession().getAttribute("order");
+//		order.setShippingInfo(new ShippingInfo());
+//		
+//		request.getSession().setAttribute("order", order);
+		request.setAttribute("shipping", new ShippingInfo());
 		
 		return "ShippingEntryForm";
 	}
 	
 	@RequestMapping(path = "/submitShipping", method = RequestMethod.POST)
 	public String submitShippingInfo(@ModelAttribute("shipping") ShippingInfo info, HttpServletRequest request) {
-		request.getSession().setAttribute("shipping", info);
+//		request.getSession().setAttribute("shipping", info);
 		Order order = (Order) request.getSession().getAttribute("order");
 		order.setShippingInfo(info);
 		
-		request.getSession().setAttribute("order", order);
+//		request.getSession().setAttribute("order", order);
 		
 		return "redirect:/purchase/viewOrder";
 	}
@@ -111,6 +122,10 @@ public class PurchaseController {
 	
 	@RequestMapping(path = "/confirmOrder", method = RequestMethod.POST)
 	public String confirmOrder(HttpServletRequest request) {
+		Order order = (Order) request.getSession().getAttribute("order");
+//		System.out.println(order == null);
+		String confirmationNumber = ServiceLocator.getOrderProcessingService().processOrder(order);
+		request.getSession().setAttribute("confirmationID", confirmationNumber);
 		return "redirect:/purchase/viewConfirmation";
 	}
 	

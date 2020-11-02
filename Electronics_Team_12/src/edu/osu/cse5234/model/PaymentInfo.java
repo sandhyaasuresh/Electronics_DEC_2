@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -26,7 +27,7 @@ public class PaymentInfo implements Serializable {
 	@Column(name = "HOLDER_NAME")
 	private String cardholderName;
 	
-	@Id @GeneratedValue @Column(name = "ID")
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "ID")
 	private int id;
 	
 	public PaymentInfo() {

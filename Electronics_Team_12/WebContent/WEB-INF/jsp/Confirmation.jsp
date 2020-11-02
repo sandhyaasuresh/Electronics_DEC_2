@@ -12,7 +12,7 @@
 <div style="height:70vh;" class="container mt-3">
 <h3><center>
 Thank you for shopping with us! <br>
-Your confirmation number is: AAOO12F67
+Your confirmation number is: ${confirmationID}
 </center></h3>
 </div>
 </body>
