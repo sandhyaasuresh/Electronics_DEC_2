@@ -41,8 +41,8 @@ public class PurchaseController {
 		List<Item> items = inventory.getItems();
 		
 		for (Item item : items) {
-			item.setQuantity("0");
-			order.addItem(item);
+			item.setQuantity(0);
+			//order.addItem(item);
 		}
 		
 		request.getSession().setAttribute("order", order);
@@ -65,21 +65,30 @@ public class PurchaseController {
 	
 	@RequestMapping(path = "/paymentEntry", method = RequestMethod.GET)
 	public String displayPaymentEntryForm(HttpServletRequest request, HttpServletResponse response) {
-		request.setAttribute("payment", new PaymentInfo());
+		Order order = (Order) request.getSession().getAttribute("order");
+		order.setPaymentInfo(new PaymentInfo());
+		
+		request.getSession().setAttribute("order", order);
 		
 		return "PaymentEntryForm";
 	}
 	
 	@RequestMapping(path = "/submitPayment", method = RequestMethod.POST)
 	public String submitPayment(@ModelAttribute("payment") PaymentInfo payment, HttpServletRequest request) {
-		request.getSession().setAttribute("payment", payment);
+		Order order = (Order) request.getSession().getAttribute("order");
+		order.setPaymentInfo(payment);
+		
+		request.getSession().setAttribute("order", order);
 		
 		return "redirect:/purchase/shippingEntry";
 	}
 	
 	@RequestMapping(path = "/shippingEntry", method = RequestMethod.GET)
 	public String displayShippingForm(HttpServletRequest request, HttpServletResponse response) {
-		request.setAttribute("shipping", new ShippingInfo());
+		Order order = (Order) request.getSession().getAttribute("order");
+		order.setShippingInfo(new ShippingInfo());
+		
+		request.getSession().setAttribute("order", order);
 		
 		return "ShippingEntryForm";
 	}
@@ -87,6 +96,10 @@ public class PurchaseController {
 	@RequestMapping(path = "/submitShipping", method = RequestMethod.POST)
 	public String submitShippingInfo(@ModelAttribute("shipping") ShippingInfo info, HttpServletRequest request) {
 		request.getSession().setAttribute("shipping", info);
+		Order order = (Order) request.getSession().getAttribute("order");
+		order.setShippingInfo(info);
+		
+		request.getSession().setAttribute("order", order);
 		
 		return "redirect:/purchase/viewOrder";
 	}

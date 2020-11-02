@@ -2,7 +2,6 @@
             
     
     <wb-module deploy-name="Electronics_Team_12_InventoryManagement_EJBEAR">
-                
         <wb-resource deploy-path="/" source-path="/EarContent"/>
                         
         
@@ -24,6 +23,9 @@
             <dependency-type>uses</dependency-type>
                                 
         
+        </dependent-module>
+        <dependent-module archiveName="Electronics_Team_12.jar" deploy-path="/" handle="module:/resource/Electronics_Team_12/Electronics_Team_12">
+            <dependency-type>uses</dependency-type>
         </dependent-module>
                     
     

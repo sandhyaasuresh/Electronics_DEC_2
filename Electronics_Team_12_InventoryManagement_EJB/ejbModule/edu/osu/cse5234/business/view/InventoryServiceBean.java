@@ -14,8 +14,8 @@ import javax.persistence.PersistenceContext;
 public class InventoryServiceBean implements InventoryService {
 	@PersistenceContext
 	EntityManager entityManager;
-	private String MY_QUERY = "Select i from Item i";
-			
+	
+	private String MY_QUERY = "Select i from Item i";		
 
     /**
      * Default constructor. 
@@ -33,7 +33,7 @@ public class InventoryServiceBean implements InventoryService {
 	}
 
 	@Override
-	public boolean validateQuantity(List<Item> items) {
+	public boolean validateQuantity(List<LineItem> items) {
 		// TODO Auto-generated method stub
 		return true;
 	}

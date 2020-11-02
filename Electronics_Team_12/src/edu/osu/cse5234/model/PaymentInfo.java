@@ -2,19 +2,39 @@ package edu.osu.cse5234.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "PAYMENT_INFO")
 public class PaymentInfo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+	@Column(name = "CARD_NUM")
 	private String creditCardNumber;
+	
+	@Column(name = "EXP_DATE")
 	private String exprDate;
+	
+	@Column(name = "CVV")
 	private String cvvCode;
+	
+	@Column(name = "HOLDER_NAME")
 	private String cardholderName;
+	
+	@Id @GeneratedValue @Column(name = "ID")
+	private int id;
 	
 	public PaymentInfo() {
 		setCreditCardNumber("");
 		setExprDate("");
 		setCvvCode("");
 		setCardholderName("");
+		setId(0);
 	}
 
 	public String getCreditCardNumber() {
@@ -47,5 +67,13 @@ public class PaymentInfo implements Serializable {
 
 	public void setCardholderName(String cardholderName) {
 		this.cardholderName = cardholderName;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 }

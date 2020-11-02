@@ -2,15 +2,38 @@ package edu.osu.cse5234.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "SHIPPING_INFO")
 public class ShippingInfo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+	@Column(name = "NAME")
 	private String name;
+	
+	@Column(name = "ADDRESS1")
 	private String addressLine1;
+	
+	@Column(name = "ADDRESS2")
 	private String addressLine2;
+	
+	@Column(name = "CITY")
 	private String city;
+	
+	@Column(name = "STATE")
 	private String state;
+	
+	@Column(name = "POSTAL_CODE")
 	private String zip;
+	
+	@Id @GeneratedValue @Column(name = "ID")
+	private int id;
 	
 	public ShippingInfo() {
 		setName("");
@@ -19,6 +42,7 @@ public class ShippingInfo implements Serializable {
 		setCity("");
 		setState("");
 		setZip("");
+		setId(0);
 	}
 
 	public String getName() {
@@ -67,6 +91,14 @@ public class ShippingInfo implements Serializable {
 
 	public void setZip(String zip) {
 		this.zip = zip;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 }
