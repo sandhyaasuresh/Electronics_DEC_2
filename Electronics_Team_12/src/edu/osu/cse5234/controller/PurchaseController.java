@@ -9,9 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 //import com.sun.org.apache.bcel.internal.generic.NEW;
 
@@ -60,14 +62,17 @@ public class PurchaseController {
 	}
 	
 	@RequestMapping(path = "/submitItems", method = RequestMethod.POST)
-	public String submitItems(@ModelAttribute("order") Order order, HttpServletRequest request) {
+	public ModelAndView submitItems(@ModelAttribute("order") Order order, HttpServletRequest request) {
 		request.getSession().setAttribute("order", order);
 		
 		if (orderService.validateItemAvailability(order)) {
-			return "redirect:/purchase/paymentEntry";
+			return new ModelAndView("redirect:/purchase/paymentEntry");
 		} else {
 			request.getSession().setAttribute("isValid", false);
-			return "redirect:/purchase";
+			ModelMap mapper = new ModelMap("message", "Quantity unavailable, kindly re-enter quantities.");
+			Inventory inventory = ServiceLocator.getInventoryService().getAvailableInventory();
+			request.setAttribute("inventory", inventory);
+			return new ModelAndView("OrderEntryForm", mapper);
 		}
 	}
 	

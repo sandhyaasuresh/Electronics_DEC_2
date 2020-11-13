@@ -39,7 +39,7 @@
 	</div>
 </body>
 <%@ include file = "FooterJSP.jsp" %>
-<c:if test="${isValid}">
+<c:if test="${!isValid}">
 	<script>
 	  alert('The order quantity you have selected is unavailable. Please try again.');
 	</script>
